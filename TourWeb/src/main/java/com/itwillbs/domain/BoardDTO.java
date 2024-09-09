@@ -1,20 +1,26 @@
 package com.itwillbs.domain;
 
+
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class BoardDTO {
 
 	private int num;
-	private int readCount;
 	private String name;
 	private String subject;
 	private String content;
+	private int readCount;
 	private Timestamp date;
+	private Date startDate;
+	private Date endDate;
+	private String file;
 	
 	@Override
 	public String toString() {
-		return "BoardDTO [num=" + num + ", readCount=" + readCount + ", name=" + name + ", subject=" + subject
-				+ ", content=" + content + ", date=" + date + "]";
+		return "BoardDTO [num=" + num + ", name=" + name + ", subject=" + subject + ", content=" + content
+				+ ", readCount=" + readCount + ", date=" + date + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", file=" + file + "]";
 	}
 	public int getNum() {
 		return num;
@@ -22,7 +28,24 @@ public class BoardDTO {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
 	public String getName() {
 		return name;
 	}
