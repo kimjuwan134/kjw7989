@@ -49,7 +49,12 @@
 					<ul class="app_list">
 						<li class="clear">
 							<label for="id_lbl" class="tit_lbl pilsoo_item">아이디</label>
-							<div class="app_content"><input type="text" name="id" class="w100p" id="id_lbl" placeholder="아이디 입력해주세요"/></div>
+							<div class="app_content"><input type="text" name="id" class="w100p" id="id_lbl" placeholder="아이디 입력해주세요"/>
+							</div>
+						</li>
+						<li class="clear">
+							<label for="id_lbl" class="tit_lbl pilsoo_item"></label>
+							<div class="app_content" id="idcheck"></div>
 						</li>
 						<li class="clear">
 							<label for="pwd_lbl" class="tit_lbl pilsoo_item">비밀번호</label>
@@ -203,6 +208,31 @@ function submitbtnClick() {
 	}
 	document.fr.submit();
 }
+
+</script>
+<script type="text/javascript">
+
+	$(function(){
+		$('#id_lbl').blur(function(){
+// 			$('#idcheck').html("<b>포커스 해제</b>").css('color', 'red');
+// 			alert($('#id_lbl').val());
+			$.ajax({
+				url:'${pageContext.request.contextPath}/member/idCheck',
+				data:{'id':$('#id_lbl').val()},
+				success:function(result){
+					if(result == 'iddup'){
+						result = "아이디 중복";
+						$('#idcheck').html(result).css('color', 'red');
+					}else{
+						result = "아이디 사용 가능";
+						$('#idcheck').html(result).css('color', 'green');
+					}					
+					
+				}
+			});//ajax()
+		});//blur()
+	});//시작()
+
 </script>
 </body>
 </html>

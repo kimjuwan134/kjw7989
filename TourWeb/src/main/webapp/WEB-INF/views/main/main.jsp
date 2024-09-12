@@ -123,13 +123,13 @@
 					<a href="javascript:;">전화 상담 신청</a>
 				</p>
 				<div class="bbs_line">
-					<h3>NOTICE</h3>
+					<h3><span id="notice">NOTICE</span> | <span id="program">PROGRAM</span></h3>
 					<ul class="notice_recent">
-						<li><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
-						<li><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a></li>
-						<li><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
-						<li><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a></li>
-						<li><a href="javascript:;">투어리스트인투어 서비스 점검 안내</a></li>
+<!-- 						<li><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li> -->
+<!-- 						<li><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a></li> -->
+<!-- 						<li><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li> -->
+<!-- 						<li><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a></li> -->
+<!-- 						<li><a href="javascript:;">투어리스트인투어 서비스 점검 안내</a></li> -->
 					</ul>
 				</div>
 			</div>
@@ -208,6 +208,26 @@
 	</div>
 </div>
 <!-- //program_pop -->
-
+<script type="text/javascript">
+	
+	$(function(){
+		$('#notice').click(function(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/board/listjson",
+				dataType:"json",
+				success:function(result){
+					$.each(result, function(index, item){
+// 						alert(index);
+// 						alert(item);
+// 						alert(item.subject);
+// 						class="notice_recent"
+						$('.notice_recent').append('<li><a href="javascript:;">'+item.subject+'</a></li>');
+					})
+				}
+			});
+		});
+	});
+	
+</script>
 </body>
 </html>
