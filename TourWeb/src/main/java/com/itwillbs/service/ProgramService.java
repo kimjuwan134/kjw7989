@@ -38,4 +38,14 @@ public class ProgramService {
 		return programDAO.getBoardCount();
 	}
 
+	public BoardDTO getBoard(int num) {
+		System.out.println("ProgramService getBoard()");
+		return programDAO.getBoard(num);
+	}
+
+	public void updateBoard(BoardDTO boardDTO) {
+		System.out.println("ProgramService updateBoard()");
+		programDAO.updateBoard(boardDTO);
+	}
+
 }

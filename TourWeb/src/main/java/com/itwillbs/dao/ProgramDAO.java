@@ -31,6 +31,16 @@ public class ProgramDAO {
 		System.out.println("ProgramDAO getBoardCount()");
 		return sqlSession.selectOne(namespace + ".getBoardCount");
 	}
+
+	public BoardDTO getBoard(int num) {
+		System.out.println("ProgramDAO getBoard()");
+		return sqlSession.selectOne(namespace + ".getBoard", num);
+	}
+
+	public void updateBoard(BoardDTO boardDTO) {
+		System.out.println("ProgramDAO updateBoard()");
+		sqlSession.update(namespace + ".updateBoard", boardDTO);
+	}
 	
 	
 }

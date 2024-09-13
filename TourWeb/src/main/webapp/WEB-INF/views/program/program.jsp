@@ -77,6 +77,12 @@
 							<p>${con1}<span class="subtxt">${con2}</span></p>
 						</div>
 						<p class="btn_more"><a href="javascript:;">더보기</a></p>
+						<c:if test="${! empty sessionScope.id}">
+							<c:if test="${sessionScope.id eq 'admin'}">
+								<a href="${pageContext.request.contextPath}/program/update?num=${boardDTO.num}" class="btn_srch">글수정</a>
+								<a href="${pageContext.request.contextPath}/program/delete?num=${boardDTO.num}" class="btn_srch">글삭제</a>
+							</c:if>
+						</c:if>
 					</li>
 				</c:forEach>
 <!-- 				<li> -->

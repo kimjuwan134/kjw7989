@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.domain.BoardDTO;
@@ -104,4 +105,50 @@ public class ProgramController {
 		programService.insertBoard(boardDTO);
 		return "redirect:/program/program";
 	}
+	
+	@GetMapping("/update")
+	public String update(@RequestParam("num") int num, Model model) {
+		System.out.println("ProgramController update()");
+ 		BoardDTO boardDTO = programService.getBoard(num);
+ 		model.addAttribute("boardDTO", boardDTO);
+		return "program/update";
+	}
+	
+	@PostMapping("/updatePro")
+	public String updatePro(HttpServletRequest request, MultipartFile file) throws Exception {
+		System.out.println("ProgramController updatePro()");
+//		파일 이름 : file.getOriginalFilename();
+//		원본 파일 : file.getBytes();
+		String filename = "";
+		if(file.isEmpty()) {
+			filename = request.getParameter("oldfile");
+		}else {
+			UUID uuid = UUID.randomUUID();
+			filename = uuid.toString() + "_" + file.getOriginalFilename();
+			System.out.println("업로드 경로 : " + uploadPath);
+			System.out.println("랜덤문자_파일이름 : " + filename);
+			FileCopyUtils.copy(file.getBytes(), new File(uploadPath, filename));
+			File oldfile = new File(uploadPath, request.getParameter("oldfile"));
+			if(oldfile.exists()) {
+				oldfile.delete();
+			}
+		}
+		BoardDTO boardDTO = new BoardDTO();
+		boardDTO.setNum(Integer.parseInt(request.getParameter("num")));
+		boardDTO.setName(request.getParameter("name"));
+		boardDTO.setSubject(request.getParameter("subject"));
+		boardDTO.setContent(request.getParameter("content"));
+		String s1 = request.getParameter("startDate");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date d1 = (Date)format.parse(s1); 
+		boardDTO.setStartDate(d1);
+		String s2 = request.getParameter("endDate");
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+		Date d2 = (Date)format2.parse(s2); 
+		boardDTO.setEndDate(d2);
+		boardDTO.setFile(filename);
+		programService.updateBoard(boardDTO);
+		return "redirect:/program/program";
+	}
+	
 }

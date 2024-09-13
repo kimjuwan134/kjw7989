@@ -14,6 +14,7 @@ import com.itwillbs.domain.MemberDTO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.service.BoardService;
 import com.itwillbs.service.MemberService;
+import com.itwillbs.service.ProgramService;
 
 @RestController
 public class AjaxController {
@@ -22,6 +23,8 @@ public class AjaxController {
 	private MemberService memberService;
 	@Inject
 	private BoardService boardService;
+	@Inject
+	private ProgramService programService;
 	
 	
 	@GetMapping("/member/idCheck")
@@ -49,6 +52,20 @@ public class AjaxController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		List<BoardDTO> boardList = boardService.getBoardList(pageDTO);
+		return boardList;
+	}
+	
+	@GetMapping("/program/listjson")
+	public List<BoardDTO> listjson2() {
+		System.out.println("AjaxController listjson2()");
+		int pageSize = 5;
+		String pageNum = "1";
+		int currentPage = Integer.parseInt(pageNum);
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		List<BoardDTO> boardList = programService.getBoardList(pageDTO);
 		return boardList;
 	}
 	

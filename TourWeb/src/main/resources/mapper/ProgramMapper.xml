@@ -18,4 +18,16 @@
 	<select id="getBoardCount" resultType="java.lang.Integer">
 		select count(*) from program
 	</select>
+	
+	<select id="getBoard" resultType="com.itwillbs.domain.BoardDTO">
+		select * from program
+		where num = #{num}
+	</select>
+	
+	<update id="updateBoard">
+		update program
+		set subject = #{subject}, content = #{content}, startDate = #{startDate}, 
+		endDate = #{endDate}, file = #{file}
+		where num = #{num}
+	</update>
 </mapper>

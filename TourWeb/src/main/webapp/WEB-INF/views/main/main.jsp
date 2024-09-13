@@ -216,11 +216,20 @@
 				url:"${pageContext.request.contextPath}/board/listjson",
 				dataType:"json",
 				success:function(result){
+					$('.notice_recent').html('');
 					$.each(result, function(index, item){
-// 						alert(index);
-// 						alert(item);
-// 						alert(item.subject);
-// 						class="notice_recent"
+						$('.notice_recent').append('<li><a href="javascript:;">'+item.subject+'</a></li>');
+					})
+				}
+			});
+		});
+		$('#program').click(function(){
+			$.ajax({
+				url:"${pageContext.request.contextPath}/program/listjson",
+				dataType:"json",
+				success:function(result){
+					$('.notice_recent').html('');
+					$.each(result, function(index, item){
 						$('.notice_recent').append('<li><a href="javascript:;">'+item.subject+'</a></li>');
 					})
 				}
