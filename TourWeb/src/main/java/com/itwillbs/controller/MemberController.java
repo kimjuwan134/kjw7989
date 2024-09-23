@@ -1,5 +1,7 @@
 package com.itwillbs.controller;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.MemberDTO;
@@ -28,11 +31,19 @@ public class MemberController {
 		return "member/join";
 	}
 	
+//	@PostMapping("/insertPro")
+//	public String insertPro(MemberDTO memberDTO) {
+//		System.out.println("MemberController insertPro()");
+//		System.out.println(memberDTO);
+//		memberService.insertMember(memberDTO);
+//		return "redirect:/member/login";
+//	}
+	
 	@PostMapping("/insertPro")
-	public String insertPro(MemberDTO memberDTO) {
+	public String insertPro(@RequestParam Map<String, String> memberMap) {
 		System.out.println("MemberController insertPro()");
-		System.out.println(memberDTO);
-		memberService.insertMember(memberDTO);
+		System.out.println(memberMap);
+		memberService.insertMember(memberMap);
 		return "redirect:/member/login";
 	}
 	
@@ -61,12 +72,21 @@ public class MemberController {
 		return "redirect:/member/main";
 	}
 	
+//	@GetMapping("/update")
+//	public String update(HttpSession session, Model model) {
+//		System.out.println("MemberController update()");
+//		String id = (String)session.getAttribute("id");
+//		MemberDTO memberDTO = memberService.getMember(id);
+//		model.addAttribute("memberDTO", memberDTO);
+//		return "member/update";
+//	}
+	
 	@GetMapping("/update")
 	public String update(HttpSession session, Model model) {
 		System.out.println("MemberController update()");
 		String id = (String)session.getAttribute("id");
-		MemberDTO memberDTO = memberService.getMember(id);
-		model.addAttribute("memberDTO", memberDTO);
+		Map<String, Object> memberMap = memberService.getMember(id);
+		model.addAttribute("memberDTO", memberMap);
 		return "member/update";
 	}
 	

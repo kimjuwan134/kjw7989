@@ -1,5 +1,7 @@
 package com.itwillbs.dao;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,9 +16,14 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private static final String namespace = "com.itwillbs.mapper.MemberMapper";
 
-	public void insertMember(MemberDTO memberDTO) {
+//	public void insertMember(MemberDTO memberDTO) {
+//		System.out.println("MemberDAO insertMember()");
+//		sqlSession.insert(namespace + ".insertMember", memberDTO);
+//	}
+	
+	public void insertMember(Map<String, String> memberMap) {
 		System.out.println("MemberDAO insertMember()");
-		sqlSession.insert(namespace + ".insertMember", memberDTO);
+		sqlSession.insert(namespace + ".insertMember", memberMap);
 	}
 	
 	public MemberDTO userCheck(MemberDTO memberDTO) {
@@ -29,7 +36,12 @@ public class MemberDAO {
 		sqlSession.update(namespace + ".updateMember", memberDTO);
 	}
 
-	public MemberDTO getMember(String id) {
+//	public MemberDTO getMember(String id) {
+//		System.out.println("MemberDAO getMember()");
+//		return sqlSession.selectOne(namespace + ".getMember", id);
+//	}
+	
+	public Map<String, Object> getMember(String id) {
 		System.out.println("MemberDAO getMember()");
 		return sqlSession.selectOne(namespace + ".getMember", id);
 	}

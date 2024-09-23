@@ -1,6 +1,7 @@
 package com.itwillbs.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,9 @@ public class AjaxController {
 	public String idCheck(HttpServletRequest request) {
 		System.out.println("AjaxController idCheck()");
 		String id = request.getParameter("id");
-		MemberDTO memberDTO = memberService.getMember(id);
+		Map<String, Object> memberMap = memberService.getMember(id);
 		String result = "";
-		if(memberDTO != null) {
+		if(memberMap != null) {
 			result = "iddup";
 		}else {
 			result = "idok";
